@@ -48,6 +48,11 @@ backup() {
 			read optional
 			menu
 		;;
+                *)
+                        clear
+                        echo "option not available in our grimoare"
+                        menu
+                ;;
 	esac
 }
 menu() {
