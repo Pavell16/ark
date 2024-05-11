@@ -1,0 +1,64 @@
+#!/bin/bash
+TARGET=192.168.2.69
+LIST="inventory"
+#functions
+backup_spell(){
+	clear
+	echo -e " This wizard would like to remind you that we are only willing to cast \n our spells if you are registered in the Library of Alexandria \n AND you have checked for your targets for the spell \n\n if our perfect spell malfunctions try installing rsync and sshpass it will help cast our spells\n\n"
+	echo -e "What is your user in our Library of Alexandria:"
+	read user
+	echo -e "what is your password to alexandria:"
+	read passwd
+	clear
+	while read line; do
+		echo "begining to cast backup spell on target $line"
+		rsync -avz --whole-file --progress -e "sshpass -p '$passwd' ssh -o StrictHostKeyChecking=no"  $line $user@$TARGET:/home/$user
+		echo "target $line hasbeen afected by our backup spell"
+	done < $LIST
+	read si
+}
+target_check() {
+	clear
+	while read line; do
+		if [ -e $line ]; then
+			echo -e "target $line is ready for our spell\n"
+		else
+			echo -e "target $line is NOT available or does not exist please check your targets\n"
+		fi
+	done < $LIST
+	read comodin
+	menu
+}
+backup() {
+	case $1 in 
+		1)
+			echo -e "We will now begin checking out targets please be patient...\n"
+			sleep 3
+			target_check
+		;;
+		2)
+			echo -e "We are gathering mana to cast our backup spell please be patient...\n"
+			sleep 3
+			backup_spell
+		;;
+		3)
+			clear
+			echo -e "Here is our list of targets for our backup spell:\n"
+			cat $LIST
+			read optional
+			menu
+		;;
+	esac
+}
+menu() {
+	clear
+	echo -e "\t\tWellcome to WizardCubs your trustworthy Backup engine\n\n"
+	echo -e "1- Check our targets\n"
+	echo -e "2- Cast our backup spell\n"
+	echo -e "3- See my targets"
+	read option
+	backup "$option"
+}
+
+
+menu
