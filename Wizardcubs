@@ -50,9 +50,9 @@ target_check() {
 backup() {
         case $1 in
                 1)
-                        echo -e "We will now begin checking out targets please be patient...\n"
+                        echo -e "REINFORCEMENTS...\n"
                         sleep 3
-                        target_check
+                        mages
                 ;;
                 2)
                         echo -e "We will now begin checking out targets please be patient...\n"
