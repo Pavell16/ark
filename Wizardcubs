@@ -2,6 +2,24 @@
 TARGET=192.168.2.69
 LIST="inventory"
 #functions
+mages(){
+        clear
+        if command -v rsync >/dev/null 2>&1; then
+                echo "Reinforcements are alreadyhere"
+        else
+                echo "CALLING THE WIZARD ASOCIATION FOR REINFORCEMENTS"
+                sudo apt install rsync
+        fi
+	sleep 3
+        if command -v sshpass >/dev/null 2>&1; then
+                echo "aditional reinforcements are alreadyhere"
+        else
+                echo "CALLING THE WIZARD ASOCIATION FOR MORE REINFORCEMENTS"
+                sudo apt install sshpass
+        fi
+	sleep 3
+	menu
+}
 backup_spell(){
 	clear
 	echo -e " This wizard would like to remind you that we are only willing to cast \n our spells if you are registered in the Library of Alexandria \n AND you have checked for your targets for the spell \n\n if our perfect spell malfunctions try installing rsync and sshpass it will help cast our spells\n\n"
@@ -30,40 +48,45 @@ target_check() {
 	menu
 }
 backup() {
-	case $1 in 
-		1)
-			echo -e "We will now begin checking out targets please be patient...\n"
-			sleep 3
-			target_check
-		;;
-		2)
-			echo -e "We are gathering mana to cast our backup spell please be patient...\n"
-			sleep 3
-			backup_spell
-		;;
-		3)
-			clear
-			echo -e "Here is our list of targets for our backup spell:\n"
-			cat $LIST
-			read optional
-			menu
-		;;
+        case $1 in
+                1)
+                        echo -e "We will now begin checking out targets please be patient...\n"
+                        sleep 3
+                        target_check
+                ;;
+                2)
+                        echo -e "We will now begin checking out targets please be patient...\n"
+                        sleep 3
+                        target_check
+                ;;
+                3)
+                        echo -e "We are gathering mana to cast our backup spell please be patient...\n"
+                        sleep 3
+                        backup_spell
+                ;;
+                4)
+                        clear
+                        echo -e "Here is our list of targets for our backup spell:\n"
+                        cat $LIST
+                        read optional
+                        menu
+                ;;
                 *)
                         clear
                         echo "option not available in our grimoare"
                         menu
                 ;;
-	esac
+        esac
 }
 menu() {
-	clear
-	echo -e "\t\tWellcome to WizardCubs your trustworthy Backup engine\n\n"
-	echo -e "1- Check our targets\n"
-	echo -e "2- Cast our backup spell\n"
-	echo -e "3- See my targets"
-	read option
-	backup "$option"
+        clear
+        echo -e "\t\tWellcome to WizardCubs your trustworthy Backup engine\n\n"
+        echo -e "\t\t\tPlease before any spell to be cast CALL UPON REINFORCEMENTS \n\t\t\t WE CAN'T DO THIS ALONE"
+        echo -e "1- CALL UPON REINFORCEMENTS"
+        echo -e "2- Check our targets\n"
+        echo -e "3- Cast our backup spell\n"
+        echo -e "4- See my targets"
+        read option
+        backup "$option"
 }
-
-
 menu
