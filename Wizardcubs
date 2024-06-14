@@ -5,7 +5,7 @@ LIST="inventory"
 mages(){
         clear
         if command -v rsync >/dev/null 2>&1; then
-                echo "Reinforcements are alreadyhere"
+                echo "Reinforcements are alread here"
         else
                 echo "CALLING THE WIZARD ASOCIATION FOR REINFORCEMENTS"
                 sudo apt install rsync
@@ -81,11 +81,11 @@ backup() {
 menu() {
         clear
         echo -e "\t\tWellcome to WizardCubs your trustworthy Backup engine\n\n"
-        echo -e "\t\t\tPlease before any spell to be cast CALL UPON REINFORCEMENTS \n\t\t\t WE CAN'T DO THIS ALONE"
+        echo -e "\tPlease before any spell to be cast CALL UPON REINFORCEMENTS WE CAN'T DO THIS ALONE\n"
         echo -e "1- CALL UPON REINFORCEMENTS"
         echo -e "2- Check our targets\n"
         echo -e "3- Cast our backup spell\n"
-        echo -e "4- See my targets"
+        echo -e "4- See my targets\n"
         read option
         backup "$option"
 }
